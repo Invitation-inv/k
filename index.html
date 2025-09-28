@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوة حفل زفاف</title>
+  
+  <!-- خط عربي جميل -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <!-- أيقونات Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Amiri', serif;
+      background-color: #ffffff;
+      overflow-x: hidden;
+      color: #b6c8a2;    
+    }
+
+    .hidden {
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    .visible {
+      opacity: 1;
+    }
+
+    #intro {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background-color: black;
+    }
+    #intro video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      z-index: 1;
+    }
+#intro .overlay {
+  position: relative;
+  z-index: 2;
+  width: 100%; /* بدل 150% حتى ما يمد العناصر */
+  height: 120%; /* بدل 150% */
+  display: block; /* بدل flex حتى ما يضغط أو يمد الزر */
+  padding-bottom: 100px;
+  background-color: rgba(0,0,0,0.0);
+  text-align: center;
+  margin-top: -30px;
+  left: 0; /* بدل 10% */
+}
+
+#intro button {
+  position: absolute;
+  top: 240px; /* المسافة من الأعلى */
+  left: 20px; /* المسافة من اليسار */
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 30px;
+  border: none;
+  z-index: 3;
+  background-image: url('114582.png');
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* ظل ناعم */
+}
+ .circle-img {
+      width: 120px; /* حجم الصورة */
+      height: 120px;
+      border-radius: 45%; /* يخليها دائرية */
+      object-fit: cover; /* يظبط الصورة داخل الدائرة */
+      border: 2px solid #301352; /* إطار حول الصورة (اختياري) */
+    }
+
+    #intro.starting button {
+      display: none;
+    }
+    #intro.close {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease;
+    }
+
+    .section {
+      min-height: 100vh;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      padding: 60px 20px;
+    }
+
+    .page-content {
+      position: relative;
+      z-index: 2;
+      margin-top: 90px
+    }
+
+    .decor-img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      width: 1700px;
+      max-width: 100%;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .image-full {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: auto;
+      transform: translateY(-40px);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInText 1s forwards;
+    }
+
+    @keyframes fadeInText {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    button {
+      padding: 20px 20px;
+      font-size: 13px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 20px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: #ffffff;
+    }
+
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 999;
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 10px;
+    }
+
+    #bg-video {
+      position: fixed;
+      top:0;
+      left:0;
+      z-index: -1;
+      inset: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100vh;
+    }
+
+    #intro-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      top:0;
+      left:0;
+    }
+
+    @keyframes rotate360 {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .transparent-box {
+      background-color: rgba(0, 0, 0, 0.6); ;
+      padding: 20px;
+      border-radius: 12px;
+      color: white;
+      max-width: 90%;
+      margin: auto;
+      text-align: center;
+    }
+
+  .social-section {
+      margin-top: 40px;
+    }
+    .social-title {
+      font-size: 20px;
+      margin-bottom: 25px;
+      color: #fff;
+      animation: bounce 2s infinite;
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 35px;
+      flex-wrap: wrap;
+    }
+    .social-links a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #fff;
+      transition: transform 0.3s;
+    }
+    .social-links a:hover {
+      transform: scale(1.1);
+    }
+    .social-links i {
+      font-size: 40px;
+      padding: 18px;
+      border-radius: 50%;
+      background: rgba(23, 24, 116, 0.9);
+      margin-bottom: 8px;
+    }
+    .social-links span {
+      font-size: 15px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+  </style>
+</head>
+<body>
+
+<body>
+
+<video autoplay muted loop playsinline id="bg-video">
+  <source src="3333.mp4" type="video/mp4">
+</video>
+
+<div id="intro">
+  <img src="1000219040.jpg" id="intro-bg" alt="خلفية الانترو">
+  <div class="overlay">
+    <button onclick="startExperience()">افتح</button>
+  </div>
+</div>
+
+<div class="page-content">
+  <div class="transparent-box">
+        <img src="1000219032.jpg" alt="صورة شخصية" class="circle-img">
+
+
+    <h1>حيّاكم الله</h1>
+    <p>
+      يسعدني أن أرحب بكم أجمل ترحيب، أنتم مصدر الفخر والاعتزاز، وأنتم النبض الحقيقي للإبداع والعمل الدؤوب. أنتم من حولتم الجهد إلى إنجاز، والفكرة إلى واقع، والبساطة إلى تميز.
+    </p>
+    <p>
+      إنني معكم ومنكم، داعم أول لكم، ومؤمن بأن نجاحكم هو نجاح للمجتمع كله. أنتم قدوة في العطاء، وصورة مشرّفة للإصرار والطموح، وسأبقى دائمًا السند الذي يقف خلفكم، يشجعكم، ويفتح أمامكم الآفاق.
+    </p>
+    <p>
+      فميدان العمل ميدانكم، والمستقبل يزهو بكم، و"كحيلان الجمهور" يعتز بكل ما تقدمونه.
+    </p>
+    <p>
+      وفقكم الله وسدد خطاكم.<br>
+      أخوكم المحب والداعم لكم دائمًا،<br>
+      <strong>كحيلان الجمهور</strong>
+    </p>
+     
+
+   
+    <style>
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+    </style>
+    <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
+
+    <div class="social-section">
+      <p class="social-title">↓ للتواصل الاجتماعي</p>
+      <div class="social-links">
+        <a href="http://wa.me/966507496882" target="_blank"><i class="fab fa-whatsapp"></i><span>واتساب</span></a>
+        <a href="https://chat.whatsapp.com/I55lzooNATeCo1tzxmPBL0" target="_blank"><i class="fab fa-whatsapp"></i><span>رابط مجموعة الدعم</span></a>
+
+        <a href="https://www.instagram.com/kiss_um_murad?igsh=N2EybTUwaHNtaWFh&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i><span>إنستقرام</span></a>
+        <a href="https://snapchat.com/t/pfoYeJy1" target="_blank"><i class="fab fa-snapchat"></i><span>سناب شات</span></a>
+        <a href="https://x.com/alalami_1199?t=FsUEjpsqDVmeW7wYd1WFjQ&s=09" target="_blank"><i class="fab fa-x-twitter"></i><span>إكس</span></a>
+        <a href="tel:966507496882"><i class="fas fa-phone"></i><span>اتصال: 966507496882</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <style>
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+    </style>
+    <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
+        
+   
+ 
+
+
+
+ <script>
+   
+  function startExperience() {
+    const intro = document.getElementById("intro");
+    const music = document.getElementById("bg-music");
+    intro.classList.add("close");
+    music.play().catch(() => {});
+    setTimeout(() => {
+      intro.remove();
+    }, 1000);
+  }
+
+
+
+  
+
+</script>
+
+
+</body>
+</html>
+
